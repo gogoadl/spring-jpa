@@ -17,4 +17,4 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug # 로거를 통해 로깅 활성화
-
+    org.hibernate.orm.jdbc.bind: trace # 로깅 시 실제 파라미터 표시
