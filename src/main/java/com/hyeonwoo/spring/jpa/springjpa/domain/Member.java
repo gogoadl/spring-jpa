@@ -1,14 +1,15 @@
 package com.hyeonwoo.spring.jpa.springjpa.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Member {
 
     @Id @GeneratedValue
@@ -20,6 +21,4 @@ public class Member {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
 }
