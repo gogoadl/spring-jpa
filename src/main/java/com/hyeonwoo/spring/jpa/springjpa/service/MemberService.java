@@ -31,9 +31,15 @@ public class MemberService {
     private final SpringMemberTestRepository springMemberTestRepository;
     private final TestRepository testRepository;
     public void testSpringMember() {
-        List<MemberInterface> test = springMemberRepository.findByMultipleJoinInlineViewTest();
-        log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join");
+        List<MemberInterface> test = springMemberRepository.findByMultipleJoinInlineViewParamTest(1L);
+        log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join and param");
         for (MemberInterface memberInterface : test) {
+            log.info(MemberDto.convertToDto(memberInterface).toString());
+        }
+
+        List<MemberInterface> test3 = springMemberRepository.findByMultipleJoinInlineViewTest();
+        log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join");
+        for (MemberInterface memberInterface : test3) {
             log.info(MemberDto.convertToDto(memberInterface).toString());
         }
 
