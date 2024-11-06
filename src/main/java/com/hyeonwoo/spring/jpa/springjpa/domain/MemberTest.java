@@ -18,6 +18,9 @@ public class MemberTest {
     @Column(name = "member_id")
     private Long memberId;
 
+    @Column(name = "test_id")
+    private Long test;
+
     private String name;
 
     @Embedded

@@ -34,4 +34,9 @@ public class MemberRepository {
     }
 
 
+    public List<MemberDto> findByMultipleJoinInlineViewTest() {
+        return em.createQuery("SELECT T.id as id, T.testId as testId, T.name as name, T.testName as testName, T.address as address FROM (SELECT T2.id as id, MT.id as testId,T2.name as name, T1.name as testName, T2.address as address FROM Member T2, MemberTest MT, Test T1 WHERE T2.id = MT.memberId AND T1.id = T2.id) T", MemberDto.class)
+                .getResultList();
+    }
+
 }

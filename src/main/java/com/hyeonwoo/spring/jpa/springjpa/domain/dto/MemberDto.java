@@ -11,9 +11,10 @@ public class MemberDto {
     Long id;
     Long testId;
     String name;
+    String testName;
     Address address;
 
     public static MemberDto convertToDto(MemberInterface member) {
-        return new MemberDto(member.getId(), member.getTestId(), member.getName(), member.getAddress());
+        return new MemberDto(member.getId(), member.getTestId(), member.getName(), member.getTestName(), member.getAddress());
     }
 }
