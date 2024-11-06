@@ -20,9 +20,14 @@ public class HelloController {
         model.addAttribute("data","hello!");
         return "hello";
     }
+
     @GetMapping("test")
     public void test(Model model) {
+        memberService.testMember();
+    }
 
+    @GetMapping("testMember")
+    public void testMember(Model model) {
         memberService.testSpringMember();
     }
 

@@ -1,10 +1,7 @@
 package com.hyeonwoo.spring.jpa.springjpa.domain.dto;
 
 import com.hyeonwoo.spring.jpa.springjpa.domain.Address;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @RequiredArgsConstructor

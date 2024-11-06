@@ -27,36 +27,26 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final SpringMemberRepository springMemberRepository;
     private final SpringMemberTestRepository springMemberTestRepository;
-    // 회원 가입
-    @Transactional
-    public Long join(Member member) {
-        validateDuplicateMember(member); // 중복 회원 검증
-        memberRepository.save(member);
-        return member.getId();
-    }
-
-    private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByName(member.getName());
-        if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
-        // EXCEPTION
-    }
 
     public void testSpringMember() {
         List<MemberInterface> test = springMemberRepository.findByInlineViewTest();
         List<MemberInterface> test2 = springMemberRepository.findByInlineViewTest2();
-//        List<MemberDto> test3 = springMemberRepository.findByInlineViewTest3();
+        List<MemberDto> test3 = springMemberRepository.findByInlineViewTest3();
         List<MemberDto> test4 = springMemberRepository.findByInlineViewTest4();
+
+        log.info("[Spring JPA][Interface Projection] inline subquery with join");
         for (MemberInterface memberInterface : test) {
             log.info(MemberDto.convertToDto(memberInterface).toString());
         }
+        log.info("[Spring JPA][Interface Projection] join");
         for (MemberInterface memberInterface : test2) {
             log.info(MemberDto.convertToDto(memberInterface).toString());
         }
-//        for (MemberDto memberDto : test3) {
-//            log.info(memberDto.toString());
-//        }
+        log.info("[Spring JPA][Class Projection] inline subquery with join");
+        for (MemberDto memberDto : test3) {
+            log.info(memberDto.toString());
+        }
+        log.info("[Spring JPA][Class Projection] join");
         for (MemberDto memberDto : test4) {
             log.info(memberDto.toString());
         }
@@ -65,7 +55,28 @@ public class MemberService {
     }
 
     public void testMember() {
-        List<Member> test = memberRepository.findByInlineViewTest("박현우");
+        List<MemberDto> test = memberRepository.findByInlineViewTest();
+        List<MemberDto> test2 = memberRepository.findByInlineViewTest2();
+        List<MemberDto> test3 = memberRepository.findByInlineViewTest3();
+        List<MemberDto> test4 = memberRepository.findByInlineViewTest4();
+
+        log.info("[Hibernate][DTO] inline subquery with join");
+        for (MemberDto memberDto : test) {
+            log.info(memberDto.toString());
+        }
+        log.info("[Hibernate][DTO] join");
+        for (MemberDto memberDto : test2) {
+            log.info(memberDto.toString());
+        }
+        log.info("[Hibernate][JPA style DTO] inline subquery with join");
+        for (MemberDto memberDto : test3) {
+            log.info(memberDto.toString());
+        }
+        log.info("[Hibernate][JPA style DTO] join");
+        for (MemberDto memberDto : test4) {
+            log.info(memberDto.toString());
+        }
+
         log.info(test.toString());
         // EXCEPTION
     }
@@ -80,12 +91,4 @@ public class MemberService {
         springMemberTestRepository.save(a);
     }
 
-    // 회원 전체 조회
-    public List<Member> findMembers() {
-        return memberRepository.findAll();
-    }
-
-    public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
-    }
 }

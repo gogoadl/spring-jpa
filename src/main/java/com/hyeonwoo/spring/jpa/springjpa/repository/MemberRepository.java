@@ -1,6 +1,8 @@
 package com.hyeonwoo.spring.jpa.springjpa.repository;
 
 import com.hyeonwoo.spring.jpa.springjpa.domain.Member;
+import com.hyeonwoo.spring.jpa.springjpa.domain.dto.MemberDto;
+import com.hyeonwoo.spring.jpa.springjpa.domain.dto.MemberInterface;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,27 +16,22 @@ public class MemberRepository {
 
     private final EntityManager em;
 
-    public void save(Member member) {
-        em.persist(member);
+    public List<MemberDto> findByInlineViewTest() {
+        return em.createQuery("SELECT T.id as id, T.testId as testId, T.name as name,T.address as address FROM (SELECT T2.id as id, MT.id as testId,T2.name as name,T2.address as address FROM Member T2, MemberTest MT WHERE T2.id = MT.memberId) T", MemberDto.class)
+                .getResultList();
     }
-
-    public Member findOne(Long id) {
-        return em.find(Member.class, id);
+    public List<MemberDto> findByInlineViewTest2() {
+        return em.createQuery("SELECT T2.id as id, MT.id as testId,T2.name as name,T2.address as address FROM Member T2, MemberTest MT WHERE T2.id = MT.memberId", MemberDto.class)
+                .getResultList();
     }
-
-    public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class).getResultList();
+    public List<MemberDto> findByInlineViewTest3() {
+        return em.createQuery("SELECT new com.hyeonwoo.spring.jpa.springjpa.domain.dto.MemberDto(T.id as id,T.name as name,T.address as address, T.testId as testId) FROM (SELECT T2.id as id, MT.id as testId,T2.name as name,T2.address as address FROM Member T2, MemberTest MT WHERE T2.id = MT.memberId) T", MemberDto.class)
+                .getResultList();
     }
-
-    public List<Member> findByName(String name) {
-        return em.createQuery("select m from Member m where m.name = :name", Member.class)
-                .setParameter("name", name)
+    public List<MemberDto> findByInlineViewTest4() {
+        return em.createQuery("SELECT new com.hyeonwoo.spring.jpa.springjpa.domain.dto.MemberDto(T2.id as id, MT.id as testId,T2.name as name,T2.address as address) FROM Member T2, MemberTest MT WHERE T2.id = MT.memberId", MemberDto.class)
                 .getResultList();
     }
 
-    public List<Member> findByInlineViewTest(String name) {
-        return em.createQuery("SELECT T.id, T.name, T.address FROM ( SELECT T2.id as id,T2.name as name,T2.address as address FROM Member T2 WHERE T2.id = 1) T WHERE T.name = :name", Member.class)
-                .setParameter("name", name)
-                .getResultList();
-    }
+
 }
