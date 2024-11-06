@@ -18,4 +18,9 @@ public class Address { // 값 타입은 변경 불가능하게 설계해야 한�
         this.street = street;
         this.zipCode = zipCode;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s", city, street, zipCode);
+    }
 }
