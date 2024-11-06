@@ -36,99 +36,102 @@ public class MemberService {
     public void testSpringMember() {
 
         PageRequest pageRequest = PageRequest.of(0, 5);
-        List<MemberDto> t = memberRepository.hqlTest();
+//        List<MemberDto> hqlTest = memberRepository.hqlTest();
 
-        Page<TestInterface> testt = springMemberRepository.pageRequestWithoutSubQuery(1L, pageRequest);
-        log.info("[Spring JPA][Interface Projection] page request without subquery");
-        for (TestInterface testInterface : testt) {
-            log.info(MemberDto.convertToDto(testInterface).toString());
-        }
-
-        Page<TestInterface> tes = springMemberRepository.pageRequestWithoutJoin(1L, pageRequest);
-        log.info("[Spring JPA][Interface Projection] page request without join");
-        for (TestInterface testInterface : tes) {
-            log.info(MemberDto.convertToDto(testInterface).toString());
-        }
-
-//        Page<MemberInterface> tes = springMemberRepository.findByMultipleJoinInlineViewParamTestPage(1L, pageRequest);
+//        Page<MemberInterface> findByMultipleJoinInlineViewParamTestPage = springMemberRepository.findByMultipleJoinInlineViewParamTestPage(1L, pageRequest);
 //        log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join and param page");
-//        for (MemberInterface memberInterface : tes) {
+//        for (MemberInterface memberInterface : findByMultipleJoinInlineViewParamTestPage) {
 //            log.info(MemberDto.convertToDto(memberInterface).toString());
 //        }
 
-        List<MemberInterface> test = springMemberRepository.findByMultipleJoinInlineViewParamTest(1L);
+//        Page<TestInterface> pageRequestWithoutJoin = springMemberRepository.pageRequestWithoutJoin(1L, pageRequest);
+//        log.info("[Spring JPA][Interface Projection] page request without join");
+//        for (TestInterface testInterface : pageRequestWithoutJoin) {
+//            log.info(MemberDto.convertToDto(testInterface).toString());
+//        }
+
+        Page<TestInterface> pageRequestWithoutSubQuery = springMemberRepository.pageRequestWithoutSubQuery(1L, pageRequest);
+        log.info("[Spring JPA][Interface Projection] page request without subquery");
+        for (TestInterface testInterface : pageRequestWithoutSubQuery) {
+            log.info(MemberDto.convertToDto(testInterface).toString());
+        }
+
+        List<MemberInterface> findByMultipleJoinInlineViewParamTest = springMemberRepository.findByMultipleJoinInlineViewParamTest(1L);
         log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join and param");
-        for (MemberInterface memberInterface : test) {
+        for (MemberInterface memberInterface : findByMultipleJoinInlineViewParamTest) {
             log.info(MemberDto.convertToDto(memberInterface).toString());
         }
 
-        List<MemberInterface> test3 = springMemberRepository.findByMultipleJoinInlineViewTest();
+        List<MemberInterface> findByMultipleJoinInlineViewTest = springMemberRepository.findByMultipleJoinInlineViewTest();
         log.info("[Spring JPA][Interface Projection] multiple Join inline subquery with join");
-        for (MemberInterface memberInterface : test3) {
+        for (MemberInterface memberInterface : findByMultipleJoinInlineViewTest) {
             log.info(MemberDto.convertToDto(memberInterface).toString());
         }
 
-        List<MemberDto> test2 = springMemberRepository.findByMultipleJoinInlineViewTestDto();
+        List<MemberDto> findByMultipleJoinInlineViewTestDto = springMemberRepository.findByMultipleJoinInlineViewTestDto();
         log.info("[Spring JPA][Class Projection] multiple Join inline subquery with join");
-        for (MemberDto memberDto : test2) {
+        for (MemberDto memberDto : findByMultipleJoinInlineViewTestDto) {
             log.info(memberDto.toString());
         }
 
-//        List<MemberInterface> test = springMemberRepository.findByInlineViewTest();
-//        List<MemberInterface> test2 = springMemberRepository.findByInlineViewTest2();
-//        List<MemberDto> test3 = springMemberRepository.findByInlineViewTest3();
-//        List<MemberDto> test4 = springMemberRepository.findByInlineViewTest4();
-//
-//        log.info("[Spring JPA][Interface Projection] inline subquery with join");
-//        for (MemberInterface memberInterface : test) {
-//            log.info(MemberDto.convertToDto(memberInterface).toString());
-//        }
-//        log.info("[Spring JPA][Interface Projection] join");
-//        for (MemberInterface memberInterface : test2) {
-//            log.info(MemberDto.convertToDto(memberInterface).toString());
-//        }
-//        log.info("[Spring JPA][Class Projection] inline subquery with join");
-//        for (MemberDto memberDto : test3) {
-//            log.info(memberDto.toString());
-//        }
-//        log.info("[Spring JPA][Class Projection] join");
-//        for (MemberDto memberDto : test4) {
-//            log.info(memberDto.toString());
-//        }
-//        log.info(test.toString());
-        // EXCEPTION
+        List<MemberInterface> findByInlineViewTest = springMemberRepository.findByInlineViewTest();
+        log.info("[Spring JPA][Interface Projection] inline subquery with join");
+        for (MemberInterface memberInterface : findByInlineViewTest) {
+            log.info(MemberDto.convertToDto(memberInterface).toString());
+        }
+
+        List<MemberInterface> findByInlineViewTest2 = springMemberRepository.findByInlineViewTest2();
+        log.info("[Spring JPA][Interface Projection] join");
+        for (MemberInterface memberInterface : findByInlineViewTest2) {
+            log.info(MemberDto.convertToDto(memberInterface).toString());
+        }
+
+        List<MemberDto> findByInlineViewTest3 = springMemberRepository.findByInlineViewTest3();
+        log.info("[Spring JPA][Class Projection] inline subquery with join");
+        for (MemberDto memberDto : findByInlineViewTest3) {
+            log.info(memberDto.toString());
+        }
+
+        List<MemberDto> findByInlineViewTest4 = springMemberRepository.findByInlineViewTest4();
+        log.info("[Spring JPA][Class Projection] join");
+        for (MemberDto memberDto : findByInlineViewTest4) {
+            log.info(memberDto.toString());
+        }
+
     }
 
     public void testMember() {
-        List<MemberDto> test = memberRepository.findByMultipleJoinInlineViewTest();
-        log.info("[Hibernate][DTO] multiple join inline subquery with join");
-        for (MemberDto memberDto : test) {
+
+//        List<MemberDto> findByMultipleJoinInlineViewTest = memberRepository.findByMultipleJoinInlineViewTest();
+//        log.info("[Hibernate][DTO] multiple join inline subquery with join");
+//        for (MemberDto memberDto : findByMultipleJoinInlineViewTest) {
+//            log.info(memberDto.toString());
+//        }
+
+        List<MemberDto> findByInlineViewTest = memberRepository.findByInlineViewTest();
+        log.info("[Hibernate][DTO] inline subquery with join");
+        for (MemberDto memberDto : findByInlineViewTest) {
             log.info(memberDto.toString());
         }
-//        List<MemberDto> test = memberRepository.findByInlineViewTest();
-//        List<MemberDto> test2 = memberRepository.findByInlineViewTest2();
-//        List<MemberDto> test3 = memberRepository.findByInlineViewTest3();
-//        List<MemberDto> test4 = memberRepository.findByInlineViewTest4();
-//
-//        log.info("[Hibernate][DTO] inline subquery with join");
-//        for (MemberDto memberDto : test) {
-//            log.info(memberDto.toString());
-//        }
-//        log.info("[Hibernate][DTO] join");
-//        for (MemberDto memberDto : test2) {
-//            log.info(memberDto.toString());
-//        }
-//        log.info("[Hibernate][JPA style DTO] inline subquery with join");
-//        for (MemberDto memberDto : test3) {
-//            log.info(memberDto.toString());
-//        }
-//        log.info("[Hibernate][JPA style DTO] join");
-//        for (MemberDto memberDto : test4) {
-//            log.info(memberDto.toString());
-//        }
-//
-//        log.info(test.toString());
-        // EXCEPTION
+
+        List<MemberDto> findByInlineViewTest2 = memberRepository.findByInlineViewTest2();
+        log.info("[Hibernate][DTO] join");
+        for (MemberDto memberDto : findByInlineViewTest2) {
+            log.info(memberDto.toString());
+        }
+
+        List<MemberDto> findByInlineViewTest3 = memberRepository.findByInlineViewTest3();
+        log.info("[Hibernate][JPA style DTO] inline subquery with join");
+        for (MemberDto memberDto : findByInlineViewTest3) {
+            log.info(memberDto.toString());
+        }
+
+        List<MemberDto> findByInlineViewTest4 = memberRepository.findByInlineViewTest4();
+        log.info("[Hibernate][JPA style DTO] join");
+        for (MemberDto memberDto : findByInlineViewTest4) {
+            log.info(memberDto.toString());
+        }
+
     }
 
     @Transactional

@@ -17,7 +17,7 @@ public class MemberRepository {
     private final EntityManager em;
 
     public List<MemberDto> hqlTest() {
-        return em.createQuery("SELECT count(T) FROM (SELECT count(T2) FROM Member T2 ) T", MemberDto.class)
+        return em.createQuery("SELECT count(*) FROM (SELECT count(*) FROM Member T2 ) T", MemberDto.class)
                 .getResultList();
     }
     public List<MemberDto> findByInlineViewTest() {
