@@ -36,7 +36,7 @@ public class MemberService {
     public void testSpringMember() {
 
         PageRequest pageRequest = PageRequest.of(0, 5);
-
+        List<MemberDto> t = memberRepository.hqlTest();
 
         Page<TestInterface> testt = springMemberRepository.pageRequestWithoutSubQuery(1L, pageRequest);
         log.info("[Spring JPA][Interface Projection] page request without subquery");
