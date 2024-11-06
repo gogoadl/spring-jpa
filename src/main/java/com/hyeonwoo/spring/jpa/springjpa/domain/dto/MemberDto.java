@@ -17,4 +17,8 @@ public class MemberDto {
     public static MemberDto convertToDto(MemberInterface member) {
         return new MemberDto(member.getId(), member.getTestId(), member.getName(), member.getTestName(), member.getAddress());
     }
+
+    public static MemberDto convertToDto(TestInterface member) {
+        return new MemberDto(member.getId(), 0L, member.getName(),"test", member.getAddress());
+    }
 }
